@@ -53,8 +53,8 @@ function purchaseItem() {
                         { item_id: response.idChoice }
                     ]), function(err, result) {
                         if (err) throw err;
-                        console.log("Order placed!");
                     };
+                console.log("Order placed!");
                 console.log("Your total is: $" + orderTotal);
                 connection.end();
             } else {

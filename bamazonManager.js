@@ -58,8 +58,8 @@ function viewProducts() {
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         for (var i = 0; i < results.length; i++) {
-            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" + results[i].price +
-                " | In Stock: " + results[i].stock_quantity);
+            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" +
+                results[i].price + " | In Stock: " + results[i].stock_quantity);
         }
         newFunction();
     })
@@ -69,9 +69,41 @@ function viewLowInventory() {
     console.log("Here are all items with inventory < 5:\n")
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
         for (var i = 0; i < results.length; i++) {
-            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" + results[i].price +
-                " | In Stock: " + results[i].stock_quantity);
+            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" +
+                results[i].price + " | In Stock: " + results[i].stock_quantity);
         }
         newFunction();
+    });
+};
+
+function addInventory() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "itemChoice",
+            message: "Please enter the item ID to add inventory to: "
+        },
+        {
+            type: "input",
+            name: "addQuantity",
+            message: "How much stock would you like to add?"
+        }
+    ]).then(function (response) {
+        connection.query("SELECT * FROM products WHERE ?", {item_id: response.itemChoice}, function (err, results) {
+            if (err) throw err;
+            var itemStock = parseInt(results[0].stock_quantity);
+            var addQuantity = parseInt(response.addQuantity);
+            var newQuantity = itemStock + addQuantity;
+            connection.query("UPDATE products SET ? WHERE ?",
+                [
+                    { stock_quantity: newQuantity },
+                    { item_id: response.itemChoice }
+                ]),
+                function (err, results) {
+                    if (err) throw err;
+                };
+            console.log("Inventory Updated!")
+            newFunction();
+        })
     })
 }
