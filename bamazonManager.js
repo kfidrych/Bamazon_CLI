@@ -40,11 +40,12 @@ function start() {
 };
 
 function newFunction() {
+    console.log("");
     inquirer.prompt({
         type: "confirm",
         name: "progression",
         message: "Would you like to perform another function?"
-    }).then(function(response) {
+    }).then(function (response) {
         if (response.progression === true) {
             start();
         } else {
@@ -63,3 +64,14 @@ function viewProducts() {
         newFunction();
     })
 };
+
+function viewLowInventory() {
+    console.log("Here are all items with inventory < 5:\n")
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
+        for (var i = 0; i < results.length; i++) {
+            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" + results[i].price +
+                " | In Stock: " + results[i].stock_quantity);
+        }
+        newFunction();
+    })
+}
