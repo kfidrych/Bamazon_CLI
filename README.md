@@ -20,4 +20,10 @@ First select either the `Customer` or `Manager` View to operate in.
 * Add New Product
 * Delete an Item
 
+## Demos
+
+`Customer View` - [click here](https://github.com/kfidrych/Bamazon_CLI/blob/master/Bamazon_Customer_View_Demo.mov) for a Customer Demo.
+
+`Manager View` - [click here](https://github.com/kfidrych/Bamazon_CLI/blob/master/Bamazon_Manager_View_Demo.mov) for a Manager Demo. 
+
 #### Managed by Kristian Fidrych @ kristianfidrych@gmail.com
