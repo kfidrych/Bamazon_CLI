@@ -1,4 +1,3 @@
-DROP IF EXISTS bamazon;
 CREATE DATABASE bamazon;
 USE bamazon;
 
