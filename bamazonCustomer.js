@@ -19,7 +19,7 @@ function start() {
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         for (var i = 0; i < results.length; i++) {
-            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" + results[i].price + "\n");
+            console.log("ID: " + results[i].item_id + " | " + results[i].product_name + " | Price: $" + results[i].price);
         }
         purchaseItem();
     })
